@@ -1,0 +1,36 @@
+package com.um.restfake.entities;
+
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import org.antlr.v4.runtime.misc.NotNull;
+
+import java.math.BigDecimal;
+
+@Entity
+@Table
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
+public class Producto extends Base {
+
+    @Column(name = "titulo", nullable = false)
+    private String title;
+
+    @Column(name = "precio_compra", precision = 10, scale = 2, nullable = false)
+    private BigDecimal price;
+    @Column(name = "description")
+    private String description;
+    @Column(name = "categoria")
+    private String category;
+    @Column(name = "url_imagen")
+    private String image;
+
+
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "rating_id")
+    private Rating rating;
+}
